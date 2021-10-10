@@ -1,0 +1,7 @@
+@import url('./main-layout.css');
+@import url('./views/pizzas-view.css');
+@import url('./views/drinks-view.css');
+@import url('./views/desserts-view.css');
+@import url('./views/cart-view.css');
+@import url('lumo-css-framework/all-classes.css');
+@import url('line-awesome/dist/line-awesome/css/line-awesome.min.css');

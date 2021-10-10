@@ -1,0 +1,43 @@
+.pizzas-view {
+  display: block;
+  height: 100%;
+}
+
+.pizzas-view vaadin-grid {
+  height: 100%;
+  line-height: var(--lumo-line-height-m);
+}
+
+.pizzas-view vaadin-grid,
+.pizzas-view vaadin-grid-cell-content {
+  background-color: var(--lumo-contrast-10pct);
+}
+
+.pizzas-view .card {
+  background-color: var(--lumo-base-color);
+  border-radius: var(--lumo-border-radius);
+  box-shadow: var(--lumo-box-shadow-xs);
+  padding: calc(var(--lumo-space-s) * 1.5) var(--lumo-space-m);
+}
+
+.pizzas-view .header {
+  align-items: baseline;
+}
+
+.pizzas-view .name {
+  font-size: var(--lumo-font-size-s);
+  font-weight: bold;
+  margin-right: var(--lumo-space-s);
+}
+
+.pizzas-view .price {
+  color: var(--lumo-primary-text-color);
+  font-size: var(--lumo-font-size-xs);
+}
+
+.pizzas-view .post {
+  color: var(--lumo-secondary-text-color);
+  font-size: var(--lumo-font-size-s);
+  margin-bottom: var(--lumo-space-s);
+  white-space: normal;
+}
