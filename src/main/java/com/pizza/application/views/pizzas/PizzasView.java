@@ -1,14 +1,14 @@
 package com.pizza.application.views.pizzas;
 
+import com.pizza.application.entity.Pizza;
 import com.pizza.application.views.MainLayout;
-import com.pizza.application.views.cart.Cart;
+import com.pizza.application.entity.Cart;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;
@@ -52,12 +52,12 @@ public class PizzasView extends Div implements AfterNavigationObserver {
         name.addClassName("name");
         header.add(name);
 
-        Span price = new Span(String.valueOf(pizza.getPriceString()));
-        price.addClassName("price");
-        header.add(price);
+//        Span price = new Span(String.valueOf(pizza.getPriceString()));
+//        price.addClassName("price");
+//        header.add(price);
 
-        Span description = new Span(pizza.getDescription());
-        description.addClassName("description");
+//        Span description = new Span(pizza.getDescription());
+//        description.addClassName("description");
 
         NumberField amount = new NumberField();
         amount.setWidth("100px");
@@ -76,7 +76,7 @@ public class PizzasView extends Div implements AfterNavigationObserver {
         });
         addButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
-        information.add(header, description);
+        information.add(header);
         card.add(information, amount, addButton);
         return card;
     }
@@ -86,7 +86,7 @@ public class PizzasView extends Div implements AfterNavigationObserver {
 
         // Set some data when this view is displayed.
         List<Pizza> pizzas = Arrays.asList( //
-                new Pizza("Margherita", 8.00, "Pretty doable!")
+                new Pizza("Margherita")
         );
 
         grid.setItems(pizzas);

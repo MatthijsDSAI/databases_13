@@ -1,15 +1,41 @@
-package com.pizza.application.views.desserts;
+package com.pizza.application.entity;
 
 import com.pizza.application.util.Product;
 
+import javax.persistence.*;
 import java.text.NumberFormat;
 import java.util.Locale;
 
+@Entity(name = "dessert")
+@Table(name = "dessert")
 public class Dessert implements Product {
 
+    @Id
+    @Column(name = "dessert_id", nullable = false, updatable = false)
+    @SequenceGenerator(name = "pizza_sequence", sequenceName = "pizza_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pizza_sequence")
+    private Long id;
+
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "price", nullable = false, columnDefinition = "decimal(4,2)")
     private double price;
+
+    @Column(name = "description", nullable = false)
     private String description;
+
+    public Dessert() {
+
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Dessert(String name, double price, String description) {
         this.name = name;
@@ -30,7 +56,6 @@ public class Dessert implements Product {
         return price;
     }
 
-    @Override
     public String getPriceString() {
         NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("nl", "NL"));
         String priceString = formatter.format(price);

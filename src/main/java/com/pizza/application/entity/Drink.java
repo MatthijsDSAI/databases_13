@@ -1,18 +1,17 @@
-package com.pizza.application.views.pizzas;
+package com.pizza.application.entity;
 
 import com.pizza.application.util.Product;
-import com.pizza.application.views.drinks.Drink;
 
 import java.text.NumberFormat;
 import java.util.Locale;
 
-public class Pizza implements Product {
+public class Drink implements Product {
 
     private String name;
     private double price;
     private String description;
 
-    public Pizza(String name, double price, String description) {
+    public Drink(String name, double price, String description) {
         this.name = name;
         this.price = price;
         this.description = description;
@@ -31,7 +30,6 @@ public class Pizza implements Product {
         return price;
     }
 
-    @Override
     public String getPriceString() {
         NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("nl", "NL"));
         String priceString = formatter.format(price);
@@ -40,7 +38,7 @@ public class Pizza implements Product {
 
     @Override
     public Product copyOf() {
-        return new Pizza(name, price, description);
+        return new Drink(name, price, description);
     }
 
     public void setPrice(double price) {
@@ -53,5 +51,14 @@ public class Pizza implements Product {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Drink{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

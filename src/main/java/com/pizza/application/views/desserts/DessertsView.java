@@ -1,14 +1,14 @@
 package com.pizza.application.views.desserts;
 
+import com.pizza.application.entity.Dessert;
 import com.pizza.application.views.MainLayout;
-import com.pizza.application.views.cart.Cart;
+import com.pizza.application.entity.Cart;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Span;
-import com.vaadin.flow.component.orderedlayout.FlexComponent;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.NumberField;

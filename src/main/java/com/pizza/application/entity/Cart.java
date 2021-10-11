@@ -1,9 +1,6 @@
-package com.pizza.application.views.cart;
+package com.pizza.application.entity;
 
 import com.pizza.application.util.Product;
-import com.pizza.application.views.desserts.Dessert;
-import com.pizza.application.views.drinks.Drink;
-import com.pizza.application.views.pizzas.Pizza;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -50,7 +47,7 @@ public class Cart {
         double totalPrice = 0;
         if(products != null) {
             for(int i = 0; i < products.size(); i++) {
-                totalPrice += products.get(i).getPrice();
+                totalPrice += 1;//products.get(i).getPrice();
             }
         }
         NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("nl", "NL"));

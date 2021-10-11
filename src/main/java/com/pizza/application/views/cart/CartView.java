@@ -1,16 +1,18 @@
 package com.pizza.application.views.cart;
 
+import com.pizza.application.entity.Cart;
 import com.pizza.application.util.Product;
 import com.pizza.application.views.MainLayout;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
-import com.vaadin.flow.component.html.H2;
 import com.vaadin.flow.component.html.H3;
 import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.NumberField;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.PageTitle;
@@ -35,6 +37,31 @@ public class CartView extends HorizontalLayout implements AfterNavigationObserve
         paymentLayout.setAlignItems(Alignment.START);
         H3 checkoutHeader = new H3("Payment");
         paymentLayout.add(checkoutHeader);
+
+        HorizontalLayout nameLayout = new HorizontalLayout();
+        TextField firstName = new TextField("First name");
+        TextField lastName = new TextField("Last name");
+        nameLayout.add(firstName);
+        nameLayout.add(lastName);
+
+        NumberField phoneField = new NumberField("Phone number");
+        phoneField.setWidth("300px");
+
+        HorizontalLayout addressLayout = new HorizontalLayout();
+        TextField addressField = new TextField("Street name");
+        addressField.setWidth("300px");
+        NumberField houseNumField = new NumberField("Number");
+        houseNumField.setWidth("80px");
+        addressLayout.add(addressField, houseNumField);
+
+        NumberField postField = new NumberField("Postal code");
+
+        Button orderButton = new Button("Confirm order");
+        orderButton.addClickListener(click -> {
+
+        });
+
+        paymentLayout.add(nameLayout, phoneField, addressLayout, postField, orderButton);
 
         VerticalLayout cartLayout = new VerticalLayout();
         H3 cartHeader = new H3("Order");
@@ -79,11 +106,11 @@ public class CartView extends HorizontalLayout implements AfterNavigationObserve
         name.addClassName("name");
         header.add(name);
 
-        Span price = new Span(String.valueOf(p.getPriceString()));
-        price.addClassName("price");
+//        Span price = new Span(String.valueOf(p.getPriceString()));
+//        price.addClassName("price");
 
         description.add(header);
-        card.add(description, price);
+        card.add(description);
         return card;
     }
 
