@@ -12,17 +12,17 @@ public class Dessert implements Product {
 
     @Id
     @Column(name = "dessert_id", nullable = false, updatable = false)
-    @SequenceGenerator(name = "pizza_sequence", sequenceName = "pizza_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pizza_sequence")
+    @SequenceGenerator(name = "dessert_sequence", sequenceName = "dessert_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "dessert_sequence")
     private Long id;
 
     @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "price", nullable = false, columnDefinition = "decimal(4,2)")
+    @Column(name = "price", nullable = false, columnDefinition = "DECIMAL(4,2)")
     private double price;
 
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     private String description;
 
     public Dessert() {

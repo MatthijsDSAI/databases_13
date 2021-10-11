@@ -1,6 +1,6 @@
 package com.pizza.application.views.cart;
 
-import com.pizza.application.entity.Cart;
+import com.pizza.application.util.Cart;
 import com.pizza.application.util.Product;
 import com.pizza.application.views.MainLayout;
 import com.vaadin.flow.component.button.Button;

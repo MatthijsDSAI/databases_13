@@ -3,7 +3,7 @@ package com.pizza.application.views.drinks;
 import java.util.Arrays;
 import java.util.List;
 
-import com.pizza.application.entity.Cart;
+import com.pizza.application.util.Cart;
 import com.pizza.application.entity.Drink;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
@@ -74,7 +74,6 @@ public class DrinksView extends Div implements AfterNavigationObserver {
                 Cart.addDrink((Drink)drink.copyOf());
             }
             addButton.setText("Added");
-            System.out.println(Cart.getProducts());
         });
         addButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 

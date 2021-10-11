@@ -2,13 +2,19 @@ package com.pizza.application.entity;
 
 import javax.persistence.*;
 
-@Table(name = "order")
 @Entity(name = "order")
+@Table(name = "order")
 public class Order {
 
     @Id
-    @Column(name = "order_id", nullable = false)
+    @Column(name = "order_id", nullable = false, updatable = false)
+    @SequenceGenerator(name = "order_sequence", sequenceName = "order_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_sequence")
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 
     @Column(name = "street_name", nullable = false)
     private String streetName;

@@ -3,19 +3,24 @@ package com.pizza.application.entity;
 import com.pizza.application.util.Product;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity(name = "pizza")
 @Table(name = "pizza")
 public class Pizza implements Product {
 
     @Id
-    @Column(name = "id", nullable = false, updatable = false)
+    @Column(name = "pizza_id", nullable = false, updatable = false)
     @SequenceGenerator(name = "pizza_sequence", sequenceName = "pizza_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pizza_sequence")
     private Long id;
 
     @Column(name = "name", nullable = false, length = 40)
     private String name;
+
+    @ManyToMany
+    @JoinTable(name = "pizza_ingredient", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    Set<Ingredient> ingredients;
 
     public Pizza() {
 

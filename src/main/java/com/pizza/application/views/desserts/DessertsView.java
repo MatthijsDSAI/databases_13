@@ -2,7 +2,7 @@ package com.pizza.application.views.desserts;
 
 import com.pizza.application.entity.Dessert;
 import com.pizza.application.views.MainLayout;
-import com.pizza.application.entity.Cart;
+import com.pizza.application.util.Cart;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.grid.Grid;
@@ -71,7 +71,6 @@ public class DessertsView extends Div implements AfterNavigationObserver {
                 Cart.addDessert((Dessert)dessert.copyOf());
             }
             addButton.setText("Added");
-            System.out.println(Cart.getProducts());
         });
         addButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
