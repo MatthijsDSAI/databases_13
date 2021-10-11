@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/")
+@RequestMapping("")
 public class CustomerController {
 
     @Autowired
@@ -31,7 +31,6 @@ public class CustomerController {
                 .orElseThrow(() -> new ResourceNotFoundException("Customer with id: " + customerId + " not found :("));
         return ResponseEntity.ok().body(customer);
     }
-
 
     // save customer
     @PostMapping("customers") // create recieve entity
