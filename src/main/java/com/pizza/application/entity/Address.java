@@ -13,8 +13,8 @@ public class Address {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "address_sequence")
     private Long id;
 
-    @OneToMany(mappedBy = "address")
-    private Set<Customer> customers;
+//    @OneToMany(mappedBy = "address")
+//    private Set<Customer> customers;
 
     @OneToOne(mappedBy = "address")
     private CustomerOrder customerOrder;

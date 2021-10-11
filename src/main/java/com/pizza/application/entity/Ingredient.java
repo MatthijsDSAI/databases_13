@@ -33,3 +33,4 @@ public class Ingredient {
         this.ingredient_id = ingredient_id;
     }
 }
+

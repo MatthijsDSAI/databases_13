@@ -31,4 +31,5 @@ public class CustomerOrder {
     public void setOrder_id(Long order_id) {
         this.order_id = order_id;
     }
+
 }
