@@ -24,7 +24,7 @@ public class Customer {
     private String phoneNumber;
 
     @OneToMany(mappedBy = "customer")
-    private Set<Order> orders;
+    private Set<CustomerOrder> orders;
 
     @ManyToOne
     @JoinColumn(name = "address_id", nullable = false)

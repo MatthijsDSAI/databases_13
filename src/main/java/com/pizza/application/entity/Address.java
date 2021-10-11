@@ -16,6 +16,9 @@ public class Address {
     @OneToMany(mappedBy = "address")
     private Set<Customer> customers;
 
+    @OneToOne(mappedBy = "address")
+    private CustomerOrder customerOrder;
+
     @Column(name = "postal_code")
     private String postalCode;
 
