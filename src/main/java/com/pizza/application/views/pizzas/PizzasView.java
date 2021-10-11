@@ -1,6 +1,7 @@
 package com.pizza.application.views.pizzas;
 
 import com.pizza.application.entity.Pizza;
+import com.pizza.application.service.PizzaService;
 import com.pizza.application.views.MainLayout;
 import com.pizza.application.util.Cart;
 import com.vaadin.flow.component.button.Button;
@@ -20,13 +21,16 @@ import java.util.List;
 @PageTitle("Pizzas")
 @Route(value = "pizzas", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)
-public class PizzasView extends Div implements AfterNavigationObserver {
+public class PizzasView extends Div {
 
     Grid<Pizza> grid = new Grid<>();
+    private final PizzaService service;
 
-    public PizzasView() {
+    public PizzasView(PizzaService service) {
+        this.service = service;
         addClassName("pizzas-view");
         setSizeFull();
+        grid.setItems(service.findAllPizzas());
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER, GridVariant.LUMO_NO_ROW_BORDERS);
         grid.addComponentColumn(pizza -> createCard(pizza));
         this.add(grid);
@@ -78,17 +82,6 @@ public class PizzasView extends Div implements AfterNavigationObserver {
         information.add(header);
         card.add(information, amount, addButton);
         return card;
-    }
-
-    @Override
-    public void afterNavigation(AfterNavigationEvent event) {
-
-        // Set some data when this view is displayed.
-        List<Pizza> pizzas = Arrays.asList( //
-                new Pizza("Margherita")
-        );
-
-        grid.setItems(pizzas);
     }
 
 }

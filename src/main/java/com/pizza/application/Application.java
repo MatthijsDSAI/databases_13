@@ -22,11 +22,4 @@ public class Application extends SpringBootServletInitializer {
         LaunchUtil.launchBrowserInDevelopmentMode(SpringApplication.run(Application.class, args));
     }
 
-    @Bean
-    CommandLineRunner commandLineRunner(PizzaRepository pizzaRepository) {
-        return args -> {
-            pizzaRepository.save(new Pizza("Margerita"));
-        };
-    }
-
 }

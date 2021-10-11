@@ -3,6 +3,7 @@ package com.pizza.application.views.drinks;
 import java.util.Arrays;
 import java.util.List;
 
+import com.pizza.application.service.PizzaService;
 import com.pizza.application.util.Cart;
 import com.pizza.application.entity.Drink;
 import com.vaadin.flow.component.button.Button;
@@ -22,13 +23,16 @@ import com.pizza.application.views.MainLayout;
 
 @PageTitle("Drinks")
 @Route(value = "drinks", layout = MainLayout.class)
-public class DrinksView extends Div implements AfterNavigationObserver {
+public class DrinksView extends Div {
 
     Grid<Drink> grid = new Grid<>();
+    private PizzaService service;
 
-    public DrinksView() {
+    public DrinksView(PizzaService service) {
+        this.service = service;
         addClassName("drinks-view");
         setSizeFull();
+        grid.setItems(service.findAllDrinks());
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER, GridVariant.LUMO_NO_ROW_BORDERS);
         grid.addComponentColumn(drink -> createCard(drink));
         this.add(grid);
@@ -80,17 +84,6 @@ public class DrinksView extends Div implements AfterNavigationObserver {
         information.add(header, description);
         card.add(information, amount, addButton);
         return card;
-    }
-
-    @Override
-    public void afterNavigation(AfterNavigationEvent event) {
-
-        // Set some data when this view is displayed.
-        List<Drink> drinks = Arrays.asList( //
-                new Drink("Coca Cola", 2.30, "Pretty doable!")
-        );
-
-        grid.setItems(drinks);
     }
 
 }
