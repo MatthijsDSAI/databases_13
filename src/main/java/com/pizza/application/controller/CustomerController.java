@@ -23,6 +23,7 @@ public class CustomerController {
     public List<Customer> getAllCustomer() {
         return this.customerRepository.findAll();
     }
+
     // get customer by id
     @GetMapping("/customers/{id}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable(value = "id") Long customerId)
@@ -37,7 +38,8 @@ public class CustomerController {
     public Customer createCustomer(@RequestBody Customer customer) {
         return this.customerRepository.save(customer);
     }
-/*
+
+    /*
     // udpate employee
     @PutMapping("customers/{id}")
     public ResponseEntity<Customer> updateCustomer(
