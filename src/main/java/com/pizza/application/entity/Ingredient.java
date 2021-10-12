@@ -25,11 +25,12 @@ public class Ingredient {
     @ManyToMany(mappedBy = "ingredients")
     Set<Pizza> pizzas;
 
-    public Long getIngredient_id_id() {
+    public double getPrice() {
+        return price;
+    }
+
+    public Long getIngredient_id() {
         return ingredient_id;
     }
 
-    public void setIngredient_id(Long ingredient_id) {
-        this.ingredient_id = ingredient_id;
-    }
 }

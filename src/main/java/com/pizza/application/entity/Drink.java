@@ -5,6 +5,7 @@ import com.pizza.application.util.Product;
 import javax.persistence.*;
 import java.text.NumberFormat;
 import java.util.Locale;
+import java.util.Set;
 
 @Entity(name = "drink")
 @Table(name = "drink")
@@ -24,6 +25,9 @@ public class Drink implements Product {
 
     @Column(name = "description")
     private String description;
+
+    @ManyToMany(mappedBy = "drinks")
+    Set<CustomerOrder> orders;
 
     public Drink() {
 
@@ -52,10 +56,12 @@ public class Drink implements Product {
         this.name = name;
     }
 
+    @Override
     public double getPrice() {
         return price;
     }
 
+    @Override
     public String getPriceString() {
         NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("nl", "NL"));
         String priceString = formatter.format(price);

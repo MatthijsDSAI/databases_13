@@ -56,9 +56,9 @@ public class PizzasView extends Div {
         name.addClassName("name");
         header.add(name);
 
-//        Span price = new Span(String.valueOf(pizza.getPriceString()));
-//        price.addClassName("price");
-//        header.add(price);
+        Span price = new Span(String.valueOf(pizza.getPriceString()));
+        price.addClassName("price");
+        header.add(price);
 
 //        Span description = new Span(pizza.getDescription());
 //        description.addClassName("description");

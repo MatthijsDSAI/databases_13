@@ -1,6 +1,7 @@
 package com.pizza.application.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Table(name = "employee")
@@ -22,6 +23,19 @@ public class Employee {
     @OneToMany(mappedBy = "employee")
     private Set<CustomerOrder> orders;
 
+    @Column(name = "postal_code")
+    private String postalCode;
+
+
+    public Employee(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public Employee() {
+
+    }
+
     public Long getEmployee_id() {
         return employee_id;
     }
@@ -29,4 +43,5 @@ public class Employee {
     public void setEmployee_id(Long employee_id) {
         this.employee_id = employee_id;
     }
+
 }
