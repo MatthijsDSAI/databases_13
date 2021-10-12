@@ -30,6 +30,7 @@ public class OrderedView extends VerticalLayout implements AfterNavigationObserv
     CustomerOrder order;
 
     public OrderedView(PizzaService service) {
+        setAlignItems(Alignment.START);
         setSpacing(true);
         setPadding(true);
         addClassName("cart-view");
@@ -50,8 +51,7 @@ public class OrderedView extends VerticalLayout implements AfterNavigationObserv
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER, GridVariant.LUMO_NO_ROW_BORDERS);
         grid.addComponentColumn(product -> createCard(product));
         grid.addClassName("grid");
-        grid.setHeight("50%");
-        grid.setWidth("30%");
+        grid.setHeight("100%");
 
         H4 status = new H4("Order status: in process");
 

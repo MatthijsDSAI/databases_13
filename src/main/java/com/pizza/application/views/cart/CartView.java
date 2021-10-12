@@ -25,6 +25,8 @@ import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.PropertyId;
 import com.vaadin.flow.data.binder.ValidationException;
+import com.vaadin.flow.data.converter.StringToIntegerConverter;
+import com.vaadin.flow.data.validator.IntegerRangeValidator;
 import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.PageTitle;
@@ -61,6 +63,16 @@ public class CartView extends HorizontalLayout implements AfterNavigationObserve
 
         binder.bindInstanceFields(this);
         binder.setBean(customer);
+
+        binder.forField(firstName)
+                .withValidator(name -> name.length() >=3, "First name must contain at least three characters")
+                .bind(Customer::getFirstName, Customer::setFirstName);
+        binder.forField(lastName)
+                .withValidator(name -> name.length() >=3, "Last name must contain at least three characters")
+                .bind(Customer::getLastName, Customer::setLastName);
+        binder.forField(phoneNumber)
+                .withValidator(phone -> phone.length() ==10, "Phone number must be 10 digits")
+                .bind(Customer::getPhoneNumber, Customer::setPhoneNumber);
 
         this.setAlignItems(Alignment.AUTO);
         this.setSpacing(true);
