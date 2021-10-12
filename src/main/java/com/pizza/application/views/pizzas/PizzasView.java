@@ -93,7 +93,7 @@ public class PizzasView extends Div {
         Button addButton = new Button("Add");
         addButton.addClickListener(click -> {
             for(int i = 0; i < amount.getValue(); i++) {
-                Cart.addPizza((Pizza)pizza.copyOf());
+                Cart.addPizza(pizza);
             }
             addButton.setText("Added");
         });
