@@ -1,6 +1,7 @@
 package com.pizza.application.views.desserts;
 
 import com.pizza.application.entity.Dessert;
+import com.pizza.application.service.PizzaService;
 import com.pizza.application.views.MainLayout;
 import com.pizza.application.util.Cart;
 import com.vaadin.flow.component.button.Button;
@@ -19,15 +20,16 @@ import java.util.List;
 
 @PageTitle("Desserts")
 @Route(value = "desserts", layout = MainLayout.class)
-public class DessertsView extends Div implements AfterNavigationObserver {
+public class DessertsView extends Div {
 
     Grid<Dessert> grid = new Grid<>();
 
-    public DessertsView() {
+    public DessertsView(PizzaService service) {
         addClassName("desserts-view");
         setSizeFull();
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER, GridVariant.LUMO_NO_ROW_BORDERS);
         grid.addComponentColumn(dessert -> createCard(dessert));
+        grid.setItems(service.findAllDesserts());
         this.add(grid);
     }
 
@@ -56,7 +58,7 @@ public class DessertsView extends Div implements AfterNavigationObserver {
         header.add(price);
 
         Span description = new Span(dessert.getDescription());
-        description.addClassName("description");
+        description.addClassName("post");
 
         NumberField amount = new NumberField();
         amount.setWidth("100px");
@@ -78,17 +80,4 @@ public class DessertsView extends Div implements AfterNavigationObserver {
         card.add(information, amount, addButton);
         return card;
     }
-
-    @Override
-    public void afterNavigation(AfterNavigationEvent event) {
-
-        // Set some data when this view is displayed.
-        List<Dessert> desserts = Arrays.asList( //
-                new Dessert("Sundae", 3.50, "Pretty doable!"),
-                new Dessert("Brownie", 4.00, "Not so doable!")
-        );
-
-        grid.setItems(desserts);
-    }
-
 }

@@ -1,76 +1,68 @@
-package com.pizza.application.views.confirmation;
+package com.pizza.application.views.ordered;
 
 import com.pizza.application.entity.CustomerOrder;
-import com.pizza.application.entity.Employee;
 import com.pizza.application.service.PizzaService;
 import com.pizza.application.util.Cart;
 import com.pizza.application.util.Product;
 import com.pizza.application.views.MainLayout;
-import com.vaadin.flow.component.UI;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.H3;
+import com.vaadin.flow.component.html.H4;
 import com.vaadin.flow.component.html.Span;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.router.AfterNavigationEvent;
+import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.server.Command;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
-@PageTitle("Order confirmation")
-@Route(value = "confirm-order", layout = MainLayout.class)
-public class ConfirmationView extends VerticalLayout {
+@PageTitle("Order placed")
+@Route(value = "order", layout = MainLayout.class)
+public class OrderedView extends VerticalLayout implements AfterNavigationObserver {
 
     Grid<Product> grid = new Grid<>();
-    CustomerOrder order = new CustomerOrder();
-    H3 confirmationHeader = new H3("Order");
-    Button confirmButton = new Button("Confirm order");
-    private PizzaService service;
+    CustomerOrder order;
 
-    public ConfirmationView(PizzaService service) {
-        this.service = service;
-        setAlignItems(Alignment.CENTER);
+    public OrderedView(PizzaService service) {
         setSpacing(true);
         setPadding(true);
         addClassName("cart-view");
         setWidthFull();
         setHeightFull();
 
-        grid.addThemeVariants(GridVariant.LUMO_NO_BORDER, GridVariant.LUMO_NO_ROW_BORDERS);
-        grid.addComponentColumn(product -> createCard(product));
-        grid.addClassName("grid");
-        grid.setWidth("30%");
-        grid.setHeight("50%");
+        HorizontalLayout overview = new HorizontalLayout();
+        overview.setHeight("100%");
+        overview.setWidth("100%");
+
+        H3 orderedHeader = new H3("Thank you for your order!");
+        add(orderedHeader);
 
         if (Cart.getProducts() != null) {
             grid.setItems(Cart.getCopyProducts());
         }
 
-        confirmButton.addClickListener(click -> {
-            List<Product> products = new ArrayList<>();
-            if (!Cart.getPizzas().isEmpty()) {
-                order.setDrinks(Cart.getDrinks());
-                order.setDesserts(Cart.getDesserts());
-                order.setPizzas(Cart.getPizzas());
-                order.setCustomer(Cart.getCustomer());
-                order.setAddress(Cart.getAddress());
-                order.setEmployee(service.findEmployee(Cart.getAddress().getPostalCode()));
+        grid.addThemeVariants(GridVariant.LUMO_NO_BORDER, GridVariant.LUMO_NO_ROW_BORDERS);
+        grid.addComponentColumn(product -> createCard(product));
+        grid.addClassName("grid");
+        grid.setHeight("50%");
+        grid.setWidth("30%");
 
-                service.saveOrder(order);
+        H4 status = new H4("Order status: in process");
 
-                Cart.setOrder(order);
-
-                UI.getCurrent().navigate("order");
-            }
-            else {
-                confirmButton.setText("Order requires at least one pizza!");
-            }
+        Button cancelButton = new Button("Cancel order");
+        cancelButton.addClickListener(click -> {
+            service.deleteOrder(order);
+            cancelButton.setText("Order cancelled");
         });
 
-        add(confirmationHeader, grid, confirmButton);
+        overview.add(grid, status);
+        add(overview, cancelButton);
     }
 
     private HorizontalLayout createCard(Product p) {
@@ -99,5 +91,10 @@ public class ConfirmationView extends VerticalLayout {
         description.add(header);
         card.add(description, price);
         return card;
+    }
+
+    @Override
+    public void afterNavigation(AfterNavigationEvent afterNavigationEvent) {
+        order = Cart.getOrder();
     }
 }

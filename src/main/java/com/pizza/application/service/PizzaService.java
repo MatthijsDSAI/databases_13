@@ -2,6 +2,7 @@ package com.pizza.application.service;
 
 import com.pizza.application.entity.*;
 import com.pizza.application.repository.*;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -75,6 +76,10 @@ public class PizzaService {
             return null;
         }
         return customerOrderRepository.save(order);
+    }
+
+    public void deleteOrder(CustomerOrder order) {
+        customerOrderRepository.delete(order);
     }
 
     public Employee findEmployee(String postalCode) {

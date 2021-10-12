@@ -16,8 +16,17 @@ public class Cart {
     private static List<Product> desserts = new ArrayList<>();
     private static Customer customer;
     private static Address address;
+    private static CustomerOrder order;
 
     public Cart() {
+    }
+
+    public static CustomerOrder getOrder() {
+        return order;
+    }
+
+    public static void setOrder(CustomerOrder order) {
+        Cart.order = order;
     }
 
     public static Customer getCustomer() {
@@ -73,6 +82,29 @@ public class Cart {
         }
         if(!products.isEmpty()) {
             return products;
+        }
+        return null;
+    }
+
+    public static List<Product> getCopyProducts() {
+        List<Product> copyProducts = new ArrayList<>();
+        if (!pizzas.isEmpty()) {
+            for(int i = 0; i < pizzas.size(); i++) {
+                copyProducts.add(pizzas.get(i).copyOf());
+            }
+        }
+        if (!drinks.isEmpty()) {
+            for(int i = 0; i < drinks.size(); i++) {
+                copyProducts.add(drinks.get(i).copyOf());
+            }
+        }
+        if (!desserts.isEmpty()) {
+            for(int i = 0; i < desserts.size(); i++) {
+                copyProducts.add(desserts.get(i).copyOf());
+            }
+        }
+        if(!copyProducts.isEmpty()) {
+            return copyProducts;
         }
         return null;
     }

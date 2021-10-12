@@ -63,7 +63,7 @@ public class DrinksView extends Div {
         header.add(price);
 
         Span description = new Span(drink.getDescription());
-        description.addClassName("description");
+        description.addClassName("post");
 
         NumberField amount = new NumberField();
         amount.setWidth("100px");

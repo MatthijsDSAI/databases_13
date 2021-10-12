@@ -5,6 +5,7 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.text.NumberFormat;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Set;
@@ -22,11 +23,11 @@ public class Pizza implements Product {
     @Column(name = "name", nullable = false, length = 40)
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
     @JoinTable(name = "pizza_ingredient", joinColumns = @JoinColumn(name = "pizza_id"), inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
     Set<Ingredient> ingredients;
 
-    @ManyToMany(mappedBy = "pizzas")
+    @ManyToMany(mappedBy = "pizzas", cascade = CascadeType.MERGE)
     Set<CustomerOrder> orders;
 
     public Pizza() {
@@ -80,7 +81,9 @@ public class Pizza implements Product {
 
     @Override
     public Product copyOf() {
-        return new Pizza(name, ingredients);
+        Set<Ingredient> copy = new HashSet<>();
+        copy.addAll(ingredients);
+        return new Pizza(name, copy);
     }
 
     public Set<Ingredient> getIngredients() {

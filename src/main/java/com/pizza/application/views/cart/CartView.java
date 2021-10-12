@@ -193,7 +193,7 @@ public class CartView extends HorizontalLayout implements AfterNavigationObserve
     @Override
     public void afterNavigation(AfterNavigationEvent event) {
         if (Cart.getProducts() != null) {
-            grid.setItems(Cart.getProducts());
+            grid.setItems(Cart.getCopyProducts());
         }
     }
 
