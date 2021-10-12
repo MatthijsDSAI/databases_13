@@ -27,6 +27,7 @@ public @Data class Ingredient {
     @ManyToMany(mappedBy = "ingredients")
     Set<Pizza> pizzas;
 
+    // dessert prices are VAT exclusive
     public double getPrice() {
         return price;
     }

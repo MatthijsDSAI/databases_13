@@ -112,7 +112,7 @@ public class CartView extends HorizontalLayout implements AfterNavigationObserve
         cartLayout.setWidth("40%");
 
         H4 priceHeader = new H4();
-        priceHeader.setText("Total (inc. 9% VAT): " + Cart.getTotalPriceWithVAT());
+        priceHeader.setText("Total (inc. 9% VAT): " + Cart.getTotalPrice());
 
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER, GridVariant.LUMO_NO_ROW_BORDERS);
         grid.addComponentColumn(product -> createCard(product));
@@ -123,7 +123,7 @@ public class CartView extends HorizontalLayout implements AfterNavigationObserve
             Cart.emptyCart();
             grid.removeAllColumns();
             priceHeader.setText(
-                    "Total (inc. 9% VAT): " + Cart.getTotalPriceWithVAT()
+                    "Total (inc. 9% VAT): " + Cart.getTotalPrice()
             );
         });
         cartLayout.add(cartHeader, grid, priceHeader, emptyButton);

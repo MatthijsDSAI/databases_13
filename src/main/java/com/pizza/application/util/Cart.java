@@ -122,19 +122,6 @@ public class Cart {
         return priceString;
     }
 
-    public static String getTotalPriceWithVAT() {
-        List<Product> products = getProducts();
-        double totalPrice = 0;
-        if(products != null) {
-            for(int i = 0; i < products.size(); i++) {
-                totalPrice += products.get(i).getPrice();
-            }
-            totalPrice=totalPrice*1.09;
-        }
-        NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("nl", "NL"));
-        String priceString = formatter.format(totalPrice);
-        return priceString;
-        }
 
     public static void addPizza(Pizza p) {
         pizzas.add(p);

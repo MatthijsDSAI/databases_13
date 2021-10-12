@@ -56,6 +56,7 @@ public class Drink implements Product {
         this.name = name;
     }
 
+    // drinks prices are 9% VAT inclusive
     @Override
     public double getPrice() {
         return price;
@@ -73,6 +74,7 @@ public class Drink implements Product {
         return new Drink(name, price, description);
     }
 
+    // drinks prices are 9% VAT inclusive
     public void setPrice(double price) {
         this.price = price;
     }

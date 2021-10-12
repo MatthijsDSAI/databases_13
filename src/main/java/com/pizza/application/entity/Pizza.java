@@ -55,6 +55,19 @@ public class Pizza implements Product {
         this.name = name;
     }
 
+    public double getPurePrice() {
+        double price  = 0;
+        if(ingredients != null) {
+            for(Ingredient i : ingredients) {
+                price += i.getPrice();
+            }
+        }
+        return price;
+    }
+
+    // pizza prices are 9% VAT inclusive and have 40% profit margin
+    // and calculated based on ingredient prices
+    // Req: "Pizza prices are built up from their ingredients, which have prices and each pizza has a 40% margin for profit."
     public double getPrice() {
         double price  = 0;
         if(ingredients != null) {
@@ -62,6 +75,8 @@ public class Pizza implements Product {
                 price += i.getPrice();
             }
         }
+        // Account for 40% profit margin and 9% VAT
+        price = (price * 1.40) * 1.09;
         return price;
     }
 
@@ -75,6 +90,8 @@ public class Pizza implements Product {
                 price += i.getPrice();
             }
         }
+        // Account for 40% profit margin and 9% VAT
+        price = (price * 1.40) * 1.09;
         String priceString = formatter.format(price);
         return priceString;
     }
@@ -115,15 +132,4 @@ public class Pizza implements Product {
         return description;
     }
 
-    //    public void setPrice(double price) {
-//        this.price = price;
-//    }
-//
-//    public String getDescription() {
-//        return description;
-//    }
-//
-//    public void setDescription(String description) {
-//        this.description = description;
-//    }
 }
