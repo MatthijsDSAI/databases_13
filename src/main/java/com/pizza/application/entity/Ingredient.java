@@ -1,11 +1,13 @@
 package com.pizza.application.entity;
 
+import lombok.Data;
+
 import javax.persistence.*;
 import java.util.Set;
 
 @Table(name = "ingredient")
 @Entity(name = "ingredient")
-public class Ingredient {
+public @Data class Ingredient {
 
     @Id
     @Column(name = "ingredient_id", nullable = false, updatable = false)

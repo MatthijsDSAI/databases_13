@@ -122,7 +122,9 @@ public class CartView extends HorizontalLayout implements AfterNavigationObserve
         emptyButton.addClickListener(click -> {
             Cart.emptyCart();
             grid.removeAllColumns();
-            priceHeader.setText("Total: " + Cart.getTotalPrice());
+            priceHeader.setText(
+                    "Total (inc. 9% VAT): " + Cart.getTotalPriceWithVAT()
+            );
         });
         cartLayout.add(cartHeader, grid, priceHeader, emptyButton);
 

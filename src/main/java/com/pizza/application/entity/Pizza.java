@@ -30,7 +30,6 @@ public class Pizza implements Product {
     Set<CustomerOrder> orders;
 
     public Pizza() {
-
     }
 
     public Long getId() {
