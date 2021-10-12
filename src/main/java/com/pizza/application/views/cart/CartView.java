@@ -112,7 +112,7 @@ public class CartView extends HorizontalLayout implements AfterNavigationObserve
         cartLayout.setWidth("40%");
 
         H4 priceHeader = new H4();
-        priceHeader.setText("Total: " + Cart.getTotalPrice());
+        priceHeader.setText("Total (inc. 9% VAT): " + Cart.getTotalPriceWithVAT());
 
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER, GridVariant.LUMO_NO_ROW_BORDERS);
         grid.addComponentColumn(product -> createCard(product));
