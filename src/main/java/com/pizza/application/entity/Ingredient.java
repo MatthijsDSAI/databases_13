@@ -29,6 +29,22 @@ public class Ingredient {
         return price;
     }
 
+    public String getDiet() {
+        return diet;
+    }
+
+    public String getIngredientName() {
+        return ingredientName;
+    }
+
+    public void setIngredientName(String ingredientName) {
+        this.ingredientName = ingredientName;
+    }
+
+    public void setDiet(String diet) {
+        this.diet = diet;
+    }
+
     public Long getIngredient_id() {
         return ingredient_id;
     }

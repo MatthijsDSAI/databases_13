@@ -25,6 +25,8 @@ public class ConfirmationView extends VerticalLayout {
 
     Grid<Product> grid = new Grid<>();
     CustomerOrder order = new CustomerOrder();
+    H3 confirmationHeader = new H3("Order");
+    Button confirmButton = new Button("Confirm order");
     private PizzaService service;
 
     public ConfirmationView(PizzaService service) {
@@ -36,8 +38,6 @@ public class ConfirmationView extends VerticalLayout {
         setWidthFull();
         setHeightFull();
 
-        H3 confirmationHeader = new H3("Order");
-
         grid.addThemeVariants(GridVariant.LUMO_NO_BORDER, GridVariant.LUMO_NO_ROW_BORDERS);
         grid.addComponentColumn(product -> createCard(product));
         grid.addClassName("grid");
@@ -48,10 +48,9 @@ public class ConfirmationView extends VerticalLayout {
             grid.setItems(Cart.getProducts());
         }
 
-        Button confirmButton = new Button("Confirm order");
         confirmButton.addClickListener(click -> {
             List<Product> products = new ArrayList<>();
-            if (Cart.getProducts() != null) {
+            if (!Cart.getPizzas().isEmpty()) {
                 order.setDrinks(Cart.getDrinks());
                 order.setDesserts(Cart.getDesserts());
                 order.setPizzas(Cart.getPizzas());
@@ -62,6 +61,9 @@ public class ConfirmationView extends VerticalLayout {
                 System.out.println("!!" + Cart.getAddress().getPostalCode());
 
                 service.saveOrder(order);
+            }
+            else {
+                confirmButton.setText("Order requires at least one pizza!");
             }
         });
 

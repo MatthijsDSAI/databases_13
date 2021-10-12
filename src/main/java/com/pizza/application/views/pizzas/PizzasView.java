@@ -1,5 +1,6 @@
 package com.pizza.application.views.pizzas;
 
+import com.pizza.application.entity.Ingredient;
 import com.pizza.application.entity.Pizza;
 import com.pizza.application.service.PizzaService;
 import com.pizza.application.views.MainLayout;
@@ -17,6 +18,7 @@ import com.vaadin.flow.router.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 @PageTitle("Pizzas")
 @Route(value = "pizzas", layout = MainLayout.class)
@@ -60,8 +62,8 @@ public class PizzasView extends Div {
         price.addClassName("price");
         header.add(price);
 
-//        Span description = new Span(pizza.getDescription());
-//        description.addClassName("description");
+        Span description = new Span(pizza.toString());
+        description.addClassName("post");
 
         NumberField amount = new NumberField();
         amount.setWidth("100px");
@@ -69,6 +71,24 @@ public class PizzasView extends Div {
         amount.setHasControls(true);
         amount.setMin(1);
         amount.setMax(50);
+
+        Set<Ingredient> ingredients = pizza.getIngredients();
+
+        boolean vegetarian = true;
+        if(ingredients != null) {
+            for(Ingredient i : ingredients) {
+                if(!i.getDiet().equals("vegetarian")) {
+                    vegetarian = false;
+                    break;
+                }
+            }
+        }
+
+        if(vegetarian) {
+            Span vegetarianSpan = new Span("Vegetarian");
+            vegetarianSpan.addClassName("price");
+            header.add(vegetarianSpan);
+        }
 
         Button addButton = new Button("Add");
         addButton.addClickListener(click -> {
@@ -79,7 +99,7 @@ public class PizzasView extends Div {
         });
         addButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
 
-        information.add(header);
+        information.add(header, description);
         card.add(information, amount, addButton);
         return card;
     }

@@ -5,6 +5,7 @@ import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.text.NumberFormat;
+import java.util.Iterator;
 import java.util.Locale;
 import java.util.Set;
 
@@ -83,7 +84,36 @@ public class Pizza implements Product {
         return new Pizza(name, ingredients);
     }
 
-//    public void setPrice(double price) {
+    public Set<Ingredient> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(Set<Ingredient> ingredients) {
+        this.ingredients = ingredients;
+    }
+
+    @Override
+    public String toString() {
+        Iterator<Ingredient> itr = ingredients.iterator();
+        String description = "";
+        for(int i = 0; i < ingredients.size(); i++) {
+            if(i < ingredients.size()-1) {
+                description += itr.next().getIngredientName() + ", ";
+            }
+            else {
+                description += itr.next().getIngredientName() + ".";
+            }
+        }
+
+
+        if(description.length() > 2) {
+            description = description.substring(0, 1).toUpperCase() + description.substring(1);
+        }
+
+        return description;
+    }
+
+    //    public void setPrice(double price) {
 //        this.price = price;
 //    }
 //
